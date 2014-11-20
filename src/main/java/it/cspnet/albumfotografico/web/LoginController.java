@@ -1,6 +1,8 @@
 
 package it.cspnet.albumfotografico.web;
 
+import it.cspnet.albumfotografico.exception.UserNotFoundException;
+import it.cspnet.albumfotografico.exception.WrongPasswordException;
 import it.cspnet.albumfotografico.model.JsonResult;
 import it.cspnet.albumfotografico.model.Utente;
 import it.cspnet.albumfotografico.servizi.Servizi;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LoginController {
@@ -20,7 +23,7 @@ public class LoginController {
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JsonResult loginUtente(@RequestBody Utente utente) {
+    public @ResponseBody JsonResult loginUtente(@RequestBody Utente utente) {
         JsonResult jsr = new JsonResult();
         Utente u = null;
         try {
@@ -33,15 +36,11 @@ public class LoginController {
         } catch (WrongPasswordException ex) {
             jsr.setCodice(1);
             jsr.setMessaggio("Password errata!");
-        } catch (NonConfermatoException ex) {
-            jsr.setCodice(1);
-            jsr.setMessaggio("mail Utente non confermata");
         } catch (Exception ex) {
             jsr.setCodice(1);
             jsr.setMessaggio("Sito in manutenzione: riprovare più tardi");
         }
         return jsr;
-
     }
     
 }

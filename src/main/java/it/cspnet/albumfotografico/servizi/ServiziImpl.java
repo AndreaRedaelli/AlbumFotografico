@@ -2,7 +2,9 @@ package it.cspnet.albumfotografico.servizi;
 
 import it.cspnet.albumfotografico.dao.AlbumDao;
 import it.cspnet.albumfotografico.dao.UtenteDao;
+import it.cspnet.albumfotografico.exception.UserNotFoundException;
 import it.cspnet.albumfotografico.exception.UtenteGiaPresenteException;
+import it.cspnet.albumfotografico.exception.WrongPasswordException;
 import it.cspnet.albumfotografico.model.Album;
 import it.cspnet.albumfotografico.model.Utente;
 import javax.transaction.Transactional;
@@ -35,6 +37,19 @@ public class ServiziImpl implements Servizi {
             throw new UtenteGiaPresenteException();
         else
             this.utenteDao.save(utente);
+    }
+
+    public Utente login(String username, String password) throws UserNotFoundException, WrongPasswordException, Exception {
+        Utente user = utenteDao.findOne(username);
+        if (user != null) {
+            if (password.equals(user.getPassword())) {
+                    return user;
+            } else {
+                throw new WrongPasswordException();
+            }
+        } else {
+            throw new UserNotFoundException();
+        }
     }
 
 }

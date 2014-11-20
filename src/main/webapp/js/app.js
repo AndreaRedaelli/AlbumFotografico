@@ -1,4 +1,4 @@
-var albumFotografico = angular.module('albumFotografico', ['ngRoute']);
+var albumFotografico = angular.module('albumFotografico', ['ngRoute','ngStorage']);
 
 albumFotografico.config(['$routeProvider',
     function($routeProvider) {
@@ -16,7 +16,7 @@ albumFotografico.config(['$routeProvider',
                     controller: 'RegistrazioneCtrl'
                 }).        
                 otherwise({
-                    redirectTo: '/home'
+                    redirectTo: '/login'
                 });
     }]);
 
