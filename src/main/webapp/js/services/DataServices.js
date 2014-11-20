@@ -5,9 +5,15 @@ gestioneProdotti.factory('dataServices', function($http) {
                 success(function(data, status, headers, config) {
                     confermaCreazione(data);
                 })
+    }, registrati = function(utente, confermaRegistrazione) {
+        $http.post('registrati.do', utente).
+                success(function(data, status, headers, config) {
+                    confermaRegistrazione(data);
+                });
     };
     return {
-        creaAlbum: creaAlbum
+        creaAlbum: creaAlbum,
+        registrati: registrati,
     };
 
 
