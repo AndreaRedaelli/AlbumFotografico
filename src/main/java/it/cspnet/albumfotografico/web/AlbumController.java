@@ -12,26 +12,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AlbumController {
+
     @Autowired
     private Servizi servizi;
 
     public void setServizi(Servizi servizi) {
         this.servizi = servizi;
     }
-    
+
     @RequestMapping(name = "/creaAlbum", method = RequestMethod.POST)
     public @ResponseBody
     JsonResult creaAlbum(@RequestBody Album album) {
-       
+
         JsonResult jsonResult = new JsonResult();
-        
+
         //crea la directory dell album 
         //che si troverà nella directory personale dell utente
         servizi.creaAlbum(album);
-        
-        
-        
-        
+
         return jsonResult;
     }
 }

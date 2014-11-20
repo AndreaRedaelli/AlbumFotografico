@@ -1,4 +1,4 @@
-var albumFotografico = angular.module('albumFotografico', ['ngRoute']);
+var albumFotografico = angular.module('albumFotografico', ['ngRoute', 'ngStorage']);
 
 albumFotografico.config(['$routeProvider',
     function($routeProvider) {
@@ -11,8 +11,12 @@ albumFotografico.config(['$routeProvider',
                     templateUrl: 'partials/home-partial.html',
                     controller: 'HomeCtrl'
                 }).
+                when('/registrazione', {
+                    templateUrl: 'partials/registrazione-partial.html',
+                    controller: 'RegistrazioneCtrl'
+                }).
                 otherwise({
-                    redirectTo: '/home'
+                    redirectTo: '/registrazione'
                 });
     }]);
 
