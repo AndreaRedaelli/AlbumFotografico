@@ -7,8 +7,12 @@ albumFotografico.config(['$routeProvider',
                     templateUrl: 'partials/login-partial.html',
                     controller: 'LoginCtrl'
                 }).
+                when('/home', {
+                    templateUrl: 'partials/home-partial.html',
+                    controller: 'HomeCtrl'
+                }).
                 otherwise({
-                    redirectTo: '/login'
+                    redirectTo: '/home'
                 });
     }]);
 
