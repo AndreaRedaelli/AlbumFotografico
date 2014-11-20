@@ -2,7 +2,9 @@ package it.cspnet.albumfotografico.servizi;
 
 import it.cspnet.albumfotografico.dao.AlbumDao;
 import it.cspnet.albumfotografico.dao.UtenteDao;
+import it.cspnet.albumfotografico.exception.UtenteGiaPresenteException;
 import it.cspnet.albumfotografico.model.Album;
+import it.cspnet.albumfotografico.model.Utente;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,13 @@ public class ServiziImpl implements Servizi {
 
     public void setUtenteDao(UtenteDao utenteDao) {
         this.utenteDao = utenteDao;
+    }
+
+    public void creaUtente(Utente utente) throws UtenteGiaPresenteException {
+        if(null!=this.utenteDao.findOne(utente.getUsername()))
+            throw new UtenteGiaPresenteException();
+        else
+            this.utenteDao.save(utente);
     }
 
 }

@@ -1,5 +1,6 @@
 package it.cspnet.albumfotografico.web;
 
+import it.cspnet.albumfotografico.exception.UtenteGiaPresenteException;
 import it.cspnet.albumfotografico.model.JsonResult;
 import it.cspnet.albumfotografico.model.Utente;
 import it.cspnet.albumfotografico.servizi.Servizi;
@@ -18,8 +19,14 @@ public class RegistrazioneController {
     @RequestMapping(value = "/registrati", method = RequestMethod.POST)
     public JsonResult registrazioneUtente(@RequestBody Utente utente) {
         JsonResult jsr = new JsonResult();
-        return jsr;
-
+        try {
+            servizi.creaUtente(utente);
+            jsr.setMessaggio("ok");
+        } catch (UtenteGiaPresenteException ex) {
+            jsr.setMessaggio("utente gia' presente");
+        } finally {
+            return jsr;
+        }
     }
 
 }
