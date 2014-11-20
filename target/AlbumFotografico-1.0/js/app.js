@@ -11,6 +11,10 @@ albumFotografico.config(['$routeProvider',
                     templateUrl: 'partials/home-partial.html',
                     controller: 'HomeCtrl'
                 }).
+                when('/registrazione', {
+                    templateUrl: 'partials/registrazione-partial.html',
+                    controller: 'RegistrazioneCtrl'
+                }).        
                 otherwise({
                     redirectTo: '/home'
                 });
