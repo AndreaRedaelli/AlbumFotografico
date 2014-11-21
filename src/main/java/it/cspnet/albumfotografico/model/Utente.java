@@ -1,10 +1,12 @@
 package it.cspnet.albumfotografico.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,7 +20,9 @@ public class Utente implements Serializable {
     private String username;
     @Column(name = "PASSWORD", nullable = false, length = 20)
     private String password;
-    @OneToMany(mappedBy = "utente")
+    
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "utente")
     private Set<Album> albums = new HashSet<Album>();
 
     public Utente() {
